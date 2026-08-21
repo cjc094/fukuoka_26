@@ -1,0 +1,1592 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>2026 家庭旅遊｜釜山・福岡・由布院</title>
+  <style>
+    :root {
+      --paper: #f7f3ea;
+      --paper2: #fffdf8;
+      --ink: #26352f;
+      --muted: #6d756f;
+      --green: #4f6a59;
+      --green2: #dfe8df;
+      --teal: #159aa8;
+      --red: #b34a36;
+      --gold: #c8a45d;
+      --line: rgba(45, 70, 59, .14);
+      --shadow: 0 10px 28px rgba(48, 60, 53, .08)
+    }
+
+    * {
+      box-sizing: border-box
+    }
+
+    html {
+      scroll-behavior: smooth
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      color: var(--ink);
+      font-family: "Noto Sans TC", "Microsoft JhengHei", sans-serif;
+      font-size: 22px;
+      line-height: 1.75;
+      background: linear-gradient(rgba(255, 255, 255, .32), rgba(255, 255, 255, .32)), repeating-linear-gradient(0deg, rgba(54, 76, 65, .018) 0, rgba(54, 76, 65, .018) 1px, transparent 1px, transparent 5px), var(--paper)
+    }
+
+    main {
+      position: relative;
+    }
+
+    a {
+      color: var(--green);
+      text-decoration-thickness: 1px;
+      text-underline-offset: 3px;
+      transition: color .2s ease;
+    }
+
+    a:hover {
+      color: var(--red);
+    }
+
+    button:focus-visible,
+    a:focus-visible {
+      outline: 3px solid rgba(21, 154, 168, .42);
+      outline-offset: 3px;
+    }
+
+    img {
+      display: block;
+      max-width: 100%;
+      height: auto;
+      border-radius: 8px;
+    }
+
+    a {
+      color: var(--green);
+      text-decoration-thickness: 1px;
+      text-underline-offset: 3px;
+    }
+
+    a:hover {
+      color: var(--red);
+    }
+
+    button:focus-visible,
+    a:focus-visible {
+      outline: 3px solid rgba(21, 154, 168, .42);
+      outline-offset: 3px;
+    }
+
+    img {
+      display: block;
+      max-width: 100%;
+      height: auto;
+      border-radius: 8px;
+    }
+
+    .page {
+      max-width: 980px;
+      margin: auto;
+      padding: 18px 12px 110px
+    }
+
+    .topbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 14px
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      background: var(--paper2);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 10px 14px;
+      font-weight: 900;
+      letter-spacing: .08em;
+      color: var(--green);
+      box-shadow: var(--shadow)
+    }
+
+    .brand:before {
+      content: "旅";
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 1.8em;
+      height: 1.8em;
+      margin-right: 9px;
+      background: var(--red);
+      color: #fff;
+      border-radius: 3px;
+      font-size: .72em
+    }
+
+    .header-tools {
+      display: flex;
+      align-items: center;
+      gap: 8px
+    }
+
+    .font-tools {
+      display: flex;
+      gap: 5px;
+      background: #ffffffdd;
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      padding: 5px
+    }
+
+    .font-tools button,
+    .menu-toggle {
+      border: 0;
+      background: #f0ece3;
+      color: var(--ink);
+      font: inherit;
+      font-weight: 900;
+      cursor: pointer
+    }
+
+    .font-tools button {
+      width: 48px;
+      height: 48px;
+      border-radius: 8px
+    }
+
+    .font-tools .reset {
+      width: auto;
+      padding: 0 10px;
+      font-size: .72em
+    }
+
+    .menu-toggle {
+      width: 50px;
+      height: 50px;
+      border-radius: 8px;
+      border: 1px solid var(--line);
+      font-size: 1.2em
+    }
+
+    .side-menu {
+      position: fixed;
+      right: 12px;
+      top: 78px;
+      width: min(285px, calc(100vw - 24px));
+      background: #fffef9f7;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      box-shadow: 0 18px 40px rgba(45, 57, 50, .18);
+      padding: 14px;
+      z-index: 60;
+      transform: translateX(calc(100% + 30px));
+      opacity: 0;
+      visibility: hidden;
+      transition: .25s
+    }
+
+    .side-menu.open {
+      transform: none;
+      opacity: 1;
+      visibility: visible
+    }
+
+    .side-menu h3 {
+      margin: 0 0 10px;
+      color: var(--green)
+    }
+
+    .side-menu button {
+      width: 100%;
+      display: block;
+      text-align: left;
+      color: var(--ink);
+      padding: 10px 12px;
+      margin: 5px 0;
+      border-radius: 6px;
+      background: #f5f1e8;
+      border: 1px solid var(--line);
+      font: inherit;
+      cursor: pointer
+    }
+
+    .app-page {
+      display: none
+    }
+
+    .app-page.active {
+      display: block
+    }
+
+    .hero {
+      position: relative;
+      overflow: hidden;
+      background: var(--paper2);
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      box-shadow: var(--shadow);
+      padding: 24px 20px
+    }
+
+    .hero-inner {
+      display: grid;
+      grid-template-columns: 1.4fr .6fr;
+      gap: 18px;
+      align-items: center
+    }
+
+    .eyebrow {
+      display: inline-block;
+      padding: 6px 10px;
+      background: var(--red);
+      color: #fff;
+      border-radius: 3px;
+      font-size: .72em;
+      font-weight: 900;
+      letter-spacing: .12em
+    }
+
+    h1 {
+      margin: 12px 0 8px;
+      font-family: "Yu Mincho", "Noto Serif TC", serif;
+      font-size: clamp(2em, 5vw, 4em);
+      line-height: 1.15;
+      letter-spacing: .06em
+    }
+
+    .subtitle {
+      margin: 0;
+      color: var(--muted);
+      font-weight: 700
+    }
+
+    .badge-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 14px
+    }
+
+    .badge {
+      padding: 6px 9px;
+      border-radius: 4px;
+      background: #f2eee6;
+      border: 1px solid var(--line);
+      font-size: .78em;
+      font-weight: 800
+    }
+
+    .mini-card {
+      background: #f7f4ec;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 18px;
+      text-align: center
+    }
+
+    .mini-card .title {
+      display: inline-block;
+      background: var(--green);
+      color: #fff;
+      border-radius: 3px;
+      padding: 5px 10px;
+      font-size: .72em;
+      font-weight: 900
+    }
+
+    .mini-card strong {
+      display: block;
+      margin-top: 12px;
+      font-size: 1.8em
+    }
+
+    .mini-card span:last-child {
+      display: block;
+      margin-top: 8px;
+      color: var(--muted);
+      font-size: .8em
+    }
+
+    .now-card {
+      margin-top: 16px;
+      background: linear-gradient(135deg, #31483d, #4c6759);
+      color: #fff;
+      border-radius: 14px;
+      border-left: 6px solid var(--gold);
+      padding: 18px;
+      box-shadow: var(--shadow)
+    }
+
+    .now-kicker {
+      font-size: .72em;
+      letter-spacing: .12em;
+      opacity: .8;
+      font-weight: 900
+    }
+
+    .now-main {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 14px;
+      align-items: end;
+      margin-top: 6px
+    }
+
+    .now-title {
+      margin: 0;
+      font-size: 1.5em
+    }
+
+    .now-detail {
+      margin: 6px 0 0;
+      opacity: .9;
+      font-size: .86em
+    }
+
+    .now-time {
+      padding: 8px 12px;
+      border-radius: 7px;
+      background: #ffffff1f;
+      font-weight: 900
+    }
+
+    .section-head {
+      margin: 24px 0 12px;
+      padding-left: 12px;
+      border-left: 5px solid var(--red);
+      font-size: 1.55em;
+      font-weight: 900
+    }
+
+    .travel-divider {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin: 22px 0 10px;
+      color: var(--red);
+      font-size: .72em;
+      font-weight: 900;
+      letter-spacing: .12em
+    }
+
+    .travel-divider:before,
+    .travel-divider:after {
+      content: "";
+      height: 1px;
+      flex: 1;
+      background: var(--line)
+    }
+
+    .card-grid {
+      display: grid;
+      gap: 14px
+    }
+
+    .day-card {
+      position: relative;
+      background: var(--paper2);
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      transition: transform .2s ease, box-shadow .2s ease;
+    }
+
+    .day-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 14px 34px rgba(48, 60, 53, .12);
+    }
+
+    .day-card:before {
+      content: "";
+      display: block;
+      height: 3px;
+      background: linear-gradient(90deg, var(--red) 0 28%, var(--gold) 28% 42%, var(--green) 42% 100%)
+    }
+
+    .day-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      padding: 14px 16px;
+      background: #e7ede7;
+      border-bottom: 1px solid var(--line)
+    }
+
+    .day-date {
+      font-size: 1.25em;
+      font-weight: 900;
+      color: var(--green)
+    }
+
+    .day-tag {
+      background: var(--red);
+      color: #fff;
+      padding: 5px 9px;
+      border-radius: 999px;
+      font-size: .72em;
+      font-weight: 900;
+      line-height: 1.35;
+      box-shadow: 0 3px 8px rgba(179, 74, 54, .18);
+    }
+
+    .day-body {
+      padding: 16px
+    }
+
+    .plan-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+      align-items: stretch;
+    }
+
+    .plan-box {
+      min-width: 0;
+      background: #faf8f2;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 16px
+    }
+
+    .plan-box h3 {
+      margin: 0 0 8px;
+      padding-bottom: 7px;
+      border-bottom: 1px dashed rgba(79, 106, 89, .25);
+      color: var(--green);
+      font-size: 1em
+    }
+
+    .plan-box ul {
+      margin: 0;
+      padding-left: 1.15em
+    }
+
+    .plan-box li+li {
+      margin-top: 3px;
+    }
+
+    .plan-box li::marker {
+      color: var(--red)
+    }
+
+    .plan-box li+li {
+      margin-top: 3px;
+    }
+
+    .flight-ticket {
+      position: relative;
+      overflow: hidden;
+      padding: 0;
+      background: #fffef9;
+      border: 2px solid #27bdca;
+      border-radius: 16px;
+    }
+
+    .flight-info-box {
+      grid-column: 1 / -1;
+    }
+
+    .flight-group {
+      margin-top: 14px;
+    }
+
+    .flight-group:first-of-type {
+      margin-top: 0;
+    }
+
+    .flight-group-title {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-bottom: 8px;
+      color: var(--green);
+      font-size: .82em;
+      font-weight: 900;
+    }
+
+    .flight-group-title span {
+      color: var(--muted);
+      font-size: .78em;
+      font-weight: 700;
+    }
+
+    .flight-receipt-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      padding: 5px 9px;
+      border: 1px solid rgba(21, 154, 168, .3);
+      border-radius: 6px;
+      background: #e0f4f2;
+      color: var(--teal);
+      font-size: .72em;
+      font-weight: 900;
+      text-decoration: none;
+      white-space: nowrap;
+    }
+
+    .flight-receipt-link:hover {
+      background: var(--teal);
+      color: #fff;
+    }
+
+    .flight-receipt-meta {
+      display: grid;
+      grid-template-columns: 1.2fr 1fr 1fr;
+      gap: 12px;
+      margin-bottom: 12px;
+      padding: 12px 14px;
+      background: #f1eee5;
+      border: 1px solid var(--line);
+      border-radius: 9px;
+    }
+
+    .flight-receipt-meta div {
+      min-width: 0;
+    }
+
+    .flight-meta-label {
+      display: block;
+      color: var(--muted);
+      font-size: .6em;
+      font-weight: 800;
+      letter-spacing: .05em;
+    }
+
+    .flight-meta-value {
+      display: block;
+      overflow-wrap: anywhere;
+      color: var(--ink);
+      font-size: .78em;
+      font-weight: 900;
+    }
+
+    .flight-ticket:before,
+    .flight-ticket:after {
+      content: "";
+      position: absolute;
+      top: 50%;
+      width: 22px;
+      height: 22px;
+      background: #faf8f2;
+      border: 2px solid #27bdca;
+      border-radius: 50%;
+      transform: translateY(-50%);
+    }
+
+    .flight-ticket:before {
+      left: -13px;
+    }
+
+    .flight-ticket:after {
+      right: -13px;
+    }
+
+    .flight-ticket-head {
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      padding: 10px 18px;
+      background: #e0f4f2;
+      color: var(--green);
+      font-size: .7em;
+      font-weight: 900;
+      letter-spacing: .08em;
+    }
+
+    .flight-ticket-body {
+      display: grid;
+      grid-template-columns: minmax(100px, .8fr) 1.4fr minmax(100px, .8fr);
+      gap: 14px;
+      align-items: center;
+      padding: 16px 20px;
+    }
+
+    .flight-date {
+      color: var(--muted);
+      font-size: .72em;
+      font-weight: 900;
+    }
+
+    .flight-number {
+      display: block;
+      margin-top: 3px;
+      color: var(--ink);
+      font-size: 1.2em;
+      letter-spacing: .06em;
+    }
+
+    .flight-route {
+      text-align: center;
+      color: #159aa8;
+      font-size: 1.25em;
+      font-weight: 900;
+      line-height: 1.3;
+    }
+
+    .flight-route span {
+      display: block;
+      color: var(--muted);
+      font-size: .56em;
+      font-weight: 700;
+    }
+
+    .flight-time {
+      text-align: right;
+      color: var(--muted);
+      font-size: .68em;
+      font-weight: 800;
+    }
+
+    .flight-time strong {
+      display: block;
+      color: #159aa8;
+      font-size: 1.55em;
+      line-height: 1.25;
+    }
+
+    .flight-ticket-footer {
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      padding: 9px 20px 12px;
+      border-top: 1px dashed rgba(39, 189, 202, .55);
+      color: var(--muted);
+      font-size: .66em;
+      font-weight: 800;
+    }
+
+    .flight-ticket-footer strong {
+      color: var(--ink);
+    }
+
+    @media(max-width:760px) {
+      .flight-receipt-meta {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .flight-receipt-meta div:first-child {
+        grid-column: 1 / -1;
+      }
+
+      .flight-ticket-body {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .flight-route {
+        grid-column: 1 / -1;
+        grid-row: 1;
+      }
+
+      .flight-time {
+        text-align: left;
+      }
+    }
+
+    .note-box {
+      margin-top: 12px;
+      padding: 12px 14px;
+      border-radius: 10px;
+      background: #e7eee8;
+      border-left: 4px solid var(--green);
+      color: #435148;
+      font-weight: 700;
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, .6);
+    }
+
+    .note-box ul {
+      margin: 6px 0 0;
+    }
+
+    .today-highlight {
+      outline: 3px solid rgba(179, 74, 54, .18)
+    }
+
+    .footer-note {
+      margin-top: 22px;
+      text-align: center;
+      color: var(--muted);
+      font-size: .85em;
+      padding: 14px;
+      border-top: 1px solid var(--line)
+    }
+
+    .bottom-nav {
+      position: fixed;
+      left: 10px;
+      right: 10px;
+      bottom: 8px;
+      z-index: 50;
+      display: flex;
+      gap: 6px;
+      background: rgba(36, 51, 45, .97);
+      padding: 7px;
+      border-radius: 999px;
+      box-shadow: 0 18px 32px rgba(0, 0, 0, .18)
+    }
+
+    .bottom-nav button {
+      flex: 1;
+      text-align: center;
+      color: #ffffffb8;
+      background: transparent;
+      border: 0;
+      font: inherit;
+      padding: 9px 6px;
+      border-radius: 7px;
+      font-size: .72em;
+      font-weight: 900;
+      cursor: pointer
+    }
+
+    .bottom-nav button.active {
+      color: #fff;
+      background: #ffffff24;
+      box-shadow: inset 0 0 0 1px #ffffff20;
+    }
+
+    @media(max-width:760px) {
+
+      .hero-inner,
+      .plan-grid,
+      .now-main {
+        grid-template-columns: 1fr
+      }
+
+      .page {
+        padding-left: 8px;
+        padding-right: 8px
+      }
+
+      .mini-card {
+        display: none
+      }
+
+      .font-tools .reset {
+        display: none
+      }
+    }
+
+    .weather-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      margin-top: 24px
+    }
+
+    .weather-head .section-head {
+      margin: 0
+    }
+
+    .weather-refresh {
+      border: 1px solid var(--line);
+      background: var(--paper2);
+      color: var(--green);
+      font: inherit;
+      font-size: .72em;
+      font-weight: 900;
+      border-radius: 8px;
+      padding: 8px 12px;
+      cursor: pointer;
+      box-shadow: var(--shadow)
+    }
+
+    .weather-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+      margin-top: 12px
+    }
+
+    .weather-card {
+      background: var(--paper2);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 14px;
+      box-shadow: var(--shadow);
+      transition: transform .2s ease, box-shadow .2s ease;
+    }
+
+    .weather-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 14px 34px rgba(48, 60, 53, .12);
+    }
+
+    .weather-place {
+      font-weight: 900;
+      color: var(--green);
+      font-size: 1.05em
+    }
+
+    .weather-date {
+      color: var(--muted);
+      font-size: .72em;
+      margin-top: 2px
+    }
+
+    .weather-main {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      margin-top: 10px
+    }
+
+    .weather-status {
+      font-weight: 900
+    }
+
+    .weather-temp {
+      font-size: 1.15em;
+      font-weight: 900;
+      white-space: nowrap
+    }
+
+    .weather-rain {
+      margin-top: 6px;
+      color: var(--muted);
+      font-size: .82em
+    }
+
+    .weather-note {
+      margin-top: 10px;
+      color: var(--muted);
+      font-size: .72em
+    }
+
+    @media(max-width:760px) {
+      .weather-grid {
+        grid-template-columns: 1fr
+      }
+
+      .weather-head {
+        align-items: flex-end
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="page">
+    <div class="topbar">
+      <div class="brand">2026 家庭旅遊</div>
+      <div class="header-tools">
+        <div class="font-tools">
+          <button data-action="decrease">－</button><button class="reset" data-action="reset">重設</button><button
+            data-action="increase">＋</button>
+        </div>
+        <button class="menu-toggle" aria-label="開啟選單">☰</button>
+      </div>
+    </div>
+    <nav class="side-menu">
+      <h3>行程導覽</h3>
+      <button data-page-target="today-page">今天</button>
+      <button data-page-target="schedule-page">完整行程</button>
+      <button data-page-target="notes-page">旅途提醒</button>
+    </nav>
+    <main>
+      <section class="app-page active" id="today-page">
+        <section class="hero">
+          <div class="hero-inner">
+            <div>
+              <div class="eyebrow">2026 家庭旅遊 · 8/29 出發組</div>
+              <h1>釜山・福岡・由布院<br>家庭旅遊手冊</h1>
+              <p class="subtitle">8/29（六）— 9/6（日）｜釜山 → 福岡 → 由布院</p>
+              <div class="badge-row">
+                <span class="badge">🇰🇷 釜山</span><span class="badge">⛴️ 搭船到福岡</span><span class="badge">♨️
+                  由布院</span><span class="badge">🇯🇵 福岡</span><span class="badge">👨‍👩‍👧‍👦 家庭旅遊</span>
+              </div>
+            </div>
+          </div>
+        </section>
+        <section class="now-card">
+          <div class="now-kicker">NOW · 現在行程</div>
+          <div class="now-main">
+            <div>
+              <h2 class="now-title" id="now-title">旅程尚未開始</h2>
+              <p class="now-detail" id="now-detail">8/29 開始釜山 × 福岡家庭旅行</p>
+            </div>
+            <div class="now-time" id="now-time">--:--</div>
+          </div>
+        </section>
+
+        <div class="weather-head">
+          <div class="section-head">旅遊天氣</div>
+          <button class="weather-refresh" type="button" id="weather-refresh">更新天氣</button>
+        </div>
+        <div class="weather-grid" id="weather-grid">
+          <div class="weather-card" data-weather="busan">
+            <div class="weather-place">🇰🇷 釜山</div>
+            <div class="weather-date">8/30</div>
+            <div class="weather-main">
+              <div class="weather-status">讀取中…</div>
+              <div class="weather-temp">--</div>
+            </div>
+            <div class="weather-rain">降雨機率：--</div>
+          </div>
+          <div class="weather-card" data-weather="fukuoka">
+            <div class="weather-place">🇯🇵 福岡／博多</div>
+            <div class="weather-date">9/3</div>
+            <div class="weather-main">
+              <div class="weather-status">讀取中…</div>
+              <div class="weather-temp">--</div>
+            </div>
+            <div class="weather-rain">降雨機率：--</div>
+          </div>
+          <div class="weather-card" data-weather="yufuin">
+            <div class="weather-place">♨️ 由布院</div>
+            <div class="weather-date">9/2</div>
+            <div class="weather-main">
+              <div class="weather-status">讀取中…</div>
+              <div class="weather-temp">--</div>
+            </div>
+            <div class="weather-rain">降雨機率：--</div>
+          </div>
+          <div class="weather-card" data-weather="shimonoseki">
+            <div class="weather-place">🌊 下關／門司港</div>
+            <div class="weather-date">9/4</div>
+            <div class="weather-main">
+              <div class="weather-status">讀取中…</div>
+              <div class="weather-temp">--</div>
+            </div>
+            <div class="weather-rain">降雨機率：--</div>
+          </div>
+          <div class="weather-card" data-weather="dazaifu">
+            <div class="weather-place">⛩️ <a target="_blank" rel="noopener noreferrer"
+                href="https://www.google.com/maps/search/?api=1&query=Dazaifu%20Tenmangu">太宰府</a></div>
+            <div class="weather-date">9/4</div>
+            <div class="weather-main">
+              <div class="weather-status">讀取中…</div>
+              <div class="weather-temp">--</div>
+            </div>
+            <div class="weather-rain">降雨機率：--</div>
+          </div>
+          <div class="weather-card" data-weather="yanagawa">
+            <div class="weather-place">🛶 柳川</div>
+            <div class="weather-date">9/5</div>
+            <div class="weather-main">
+              <div class="weather-status">讀取中…</div>
+              <div class="weather-temp">--</div>
+            </div>
+            <div class="weather-rain">降雨機率：--</div>
+          </div>
+          <div class="weather-card" data-weather="itoshima">
+            <div class="weather-place">🌴 糸島</div>
+            <div class="weather-date">9/5</div>
+            <div class="weather-main">
+              <div class="weather-status">讀取中…</div>
+              <div class="weather-temp">--</div>
+            </div>
+            <div class="weather-rain">降雨機率：--</div>
+          </div>
+        </div>
+        <div class="weather-note">天氣資料會隨日期接近自動更新；尚未進入預報範圍的日期會顯示提示，不會用猜測值代替。</div>
+
+        <div class="section-head">今天怎麼走</div>
+        <article class="day-card">
+          <div class="day-top">
+            <div class="day-date" id="today-date-label">出發前</div>
+            <div class="day-tag">TODAY</div>
+          </div>
+          <div class="day-body">
+            <div class="note-box" id="today-summary">旅程開始後，這裡會顯示今天的重點行程。</div>
+          </div>
+        </article>
+      </section>
+
+      <section class="app-page" id="schedule-page">
+        <div class="travel-divider">2026 FAMILY TRIP</div>
+        <div class="section-head">行程簡介</div>
+        <div class="card-grid" id="schedule">
+
+          <article class="day-card" id="day-0830">
+            <div class="day-top">
+              <div class="day-date">8/30（日）</div>
+              <div class="day-tag">釜山</div>
+            </div>
+            <div class="day-body">
+              <div class="plan-grid">
+                <div class="plan-box">
+                  <h3>婕熙組</h3>
+                  <ul>
+                    <li> <a target="_blank" rel="noopener noreferrer"
+                        href="https://maps.app.goo.gl/8SkZLKbcPGp7Qbjf9">Spa Haesurang（스파해수랑）</a></li>
+                    <li>前往飯店寄放行李</li>
+                    <li><a target="_blank" rel="noopener noreferrer"
+                        href="https://www.google.com/maps/search/?api=1&query=Gamcheon%20Culture%20Village%20Busan">小王子／白淺灘文化村</a>
+                    </li>
+                    <li>17:00 韓牛簡單吃</li>
+                    <li>光復路時尚街</li>
+                    <li>樂天市場光復店</li>
+                    <li>20:30 <a target="_blank" rel="noopener noreferrer"
+                        href="https://www.google.com/maps/search/?api=1&query=BIFF%20Square%20Busan">BIFF 廣場</a> 49
+                      號阿珠媽煮飯</li>
+                  </ul>
+                </div>
+              </div>
+              <div class="note-box">
+                <strong>備注：</strong>
+                <ul>
+                  <li>芊伃：個人前往醫美</li>
+
+                  <li>
+                    <a target="_blank" rel="noopener noreferrer"
+                      href="https://maps.app.goo.gl/NxRjL7xJBZWs78pN9?g_st=ic">
+                      Ready Young 藥局
+                    </a>
+                  </li>
+
+                  <li>國際市場 geumhak 毛巾</li>
+                  <li>Busan is Giving 拍立得</li>
+                </ul>
+              </div>
+            </div>
+          </article>
+
+          <article class="day-card" id="day-0831">
+            <div class="day-top">
+              <div class="day-date">8/31（一）</div>
+              <div class="day-tag">釜山 → 福岡</div>
+            </div>
+            <div class="day-body">
+              <div class="plan-grid">
+                <div class="plan-box">
+                  <h3>上午・田浦／西面</h3>
+                  <ul>
+                    <li>08:00 <a target="_blank" rel="noopener noreferrer"
+                        href="https://www.google.com/maps/search/?api=1&query=Bujeon%20Market%20Busan">釜田市場</a>吃吃喝喝</li>
+                    <li>前往<a target="_blank" rel="noopener noreferrer"
+                        href="https://www.google.com/maps/search/?api=1&query=Jeonpo%20Station%20Busan">田浦站</a>逛逛</li>
+                    <li>10:00 <a target="_blank" rel="noopener noreferrer"
+                        href="https://www.google.com/maps/search/?api=1&query=OLIVE%20YOUNG%20Jeonpo%20Busan">OLIVE
+                        YOUNG 田浦 7 號出口</a>｜免費機器色彩鑑定、膚質檢測</li>
+                    <li>11:00 <a target="_blank" rel="noopener noreferrer" href="https://naver.me/FHO1m2tl">Sticker
+                        人生四格拍貼機</a></li>
+                    <li>四處逛逛</li>
+                    <li>13:00 <a target="_blank" rel="noopener noreferrer"
+                        href="https://www.google.com/maps/search/?api=1&query=Jang%20Saewoo%20Gukbap%20Seomyeon%20Busan">章蝦腸湯</a>
+                    </li>
+                  </ul>
+                </div>
+                <div class="plan-box">
+                  <h3>下午・搭船</h3>
+                  <ul>
+                    <li>西面血拼</li>
+                    <li>安排黃式姐妹剪頭髮</li>
+                    <li>回南浦拿行李</li>
+                    <li>16:30 抵達<a target="_blank" rel="noopener noreferrer"
+                        href="https://www.google.com/maps/search/?api=1&query=Busan%20Port%20International%20Passenger%20Terminal">釜山港國際旅客客運大樓</a>
+                    </li>
+                    <li>搭船前往福岡</li>
+                  </ul>
+                </div>
+              </div>
+
+
+              <div class="note-box">
+                <strong>備注：</strong>
+                <ul>
+                  <li><a target="_blank" rel="noopener noreferrer"
+                      href="https://map.naver.com/p/entry/place/2073663900?placePath=%2Fhome%3Ffrom%3Dmap%26fromPanelNum%3D1%26additionalHeight%3D76%26timestamp%3D202608212013%26locale%3Dko%26svcName%3Dmap_pcv5&c=15.00,0,0,0,dh">Sticker
+                      人生四格</a></li>
+                </ul>
+              </div>
+            </div>
+          </article>
+
+          <article class="day-card" id="day-0901">
+            <div class="day-top">
+              <div class="day-date">9/1（二）</div>
+              <div class="day-tag">由布院一泊二食</div>
+            </div>
+            <div class="day-body">
+              <div class="plan-grid">
+                <div class="plan-box">
+                  <h3>釜山組</h3>
+                  <ul>
+                    <li>08:00 抵達<a target="_blank" rel="noopener noreferrer"
+                        href="https://www.google.com/maps/search/?api=1&query=Hakata%20Port%20International%20Terminal%20Fukuoka">博多港</a>
+                      合拍「假東京鐵塔」</li>
+                    <li>09:00 前往飯店或超商寄放行李</li>
+                    <li>09:30 <a target="_blank" rel="noopener noreferrer"
+                        href="https://www.google.com/maps/search/?api=1&query=DACOMECCA%20Fukuoka">DACOMECCA 明太子麵包</a>
+                    </li>
+                    <li>走馬看花前往高速巴士站</li>
+                    <li>11:48 高速巴士往由布院</li>
+                    <li>午餐候選：<a target="_blank" rel="noopener noreferrer"
+                        href="https://www.google.com/maps/search/?api=1&query=Yuyurin%20Yufuin">yuyurin 鮭魚飯、釜飯</a></li>
+                  </ul>
+                </div>
+                <div class="plan-box">
+                  <h3>嘉義出發組</h3>
+                  <ul>
+                    <li>14:08／15:16 由福岡機場搭高速巴士前往由布院</li>
+                    <li>安排飯店接駁至花由飯店</li>
+                  </ul>
+                </div>
+              </div>
+              <div class="note-box">晚上：<a target="_blank" rel="noopener noreferrer"
+                  href="https://www.google.com/maps/search/?api=1&query=Yufuin%20Hanayoshi">由布院花由</a>一泊二食，泡湯休息。</div>
+            </div>
+          </article>
+
+          <article class="day-card" id="day-0902">
+            <div class="day-top">
+              <div class="day-date">9/2（三）</div>
+              <div class="day-tag">包車｜由布院 → 博多</div>
+            </div>
+            <div class="day-body">
+              <div class="plan-grid">
+                <div class="plan-box">
+                  <h3>上午・由布院</h3>
+                  <ul>
+                    <li>08:00 或 08:30 飯店早餐</li>
+                    <li>09:10 飯店門口集合</li>
+                    <li>09:30–10:10 <a target="_blank" rel="noopener noreferrer"
+                        href="https://www.google.com/maps/search/?api=1&query=Kinrin%20Lake%20Yufuin">金鱗湖</a>走走</li>
+                    <li>10:10–10:40 <a target="_blank" rel="noopener noreferrer"
+                        href="https://www.google.com/maps/search/?api=1&query=Yufuin%20Floral%20Village">童話村</a>拍拍照</li>
+                    <li>10:40–12:30 <a target="_blank" rel="noopener noreferrer"
+                        href="https://www.google.com/maps/search/?api=1&query=Yunotsubo%20Kaido%20Yufuin">湯之坪街道</a>吃吃喝喝
+                    </li>
+                    <li><img src="/Users/cc/Desktop/fukuoka/由布院的散步地圖.jpeg" alt="由布院的散步地圖" width="300"></li>
+                  </ul>
+                </div>
+                <div class="plan-box">
+                  <h3>午後・採果＋博多</h3>
+                  <ul>
+                    <li>12:40 出發採果</li>
+                    <li>13:45–14:30 <a target="_blank" rel="noopener noreferrer"
+                        href="https://www.google.com/maps/search/?api=1&query=KYOHO%20JAPAN%20winery%20Fukuoka">KYOHO
+                        JAPAN 酒莊</a>參觀試飲</li>
+                    <li>14:30–15:15 <a target="_blank" rel="noopener noreferrer"
+                        href="https://maps.app.goo.gl/3c1CDU6BL2HKzRnB7">緑峰園</a>採葡萄
+                    </li>
+                    <li>16:30 入住 <a target="_blank" rel="noopener noreferrer"
+                        href="https://www.google.com/maps/search/?api=1&query=CROSS%20Life%20Hakata%20Yanagibashi">CROSS
+                        Life 博多柳橋</a></li>
+                    <li>17:30 <a target="_blank" rel="noopener noreferrer"
+                        href="https://www.google.com/maps/d/u/1/edit?mid=1IXv4L9hmNHLvvtnB7JIuPL4MnBHdJDQ&usp=sharing">博多運河城</a>
+                    </li>
+                    <li>晚餐自理｜5F <a target="_blank" rel="noopener noreferrer"
+                        href="https://www.google.com/maps/search/?api=1&query=Ramen%20Stadium%20Canal%20City%20Hakata">Ramen
+                        Stadium</a></li>
+                    <li>20:30 體力好可去屋台宵夜</li>
+                  </ul>
+                </div>
+              </div>
+              <div class="note-box">
+                <ul>
+                  <li>美食：金賞可麗餅、鞠智銅鑼燒、milch 布丁、télato 抹茶、Nico 甜甜圈、漢堡屋</li>
+                  <li><a target="_blank" rel="noopener noreferrer"
+                      href="https://platinumaps.jp/d/canal-city?culture=zh-tw&floor=1F">博多運河城導覽圖</a></li>
+                </ul>
+              </div>
+            </div>
+          </article>
+
+          <article class="day-card" id="day-0903">
+            <div class="day-top">
+              <div class="day-date">9/3（四）</div>
+              <div class="day-tag">觀光列車＋天神購物</div>
+            </div>
+            <div class="day-body">
+              <div class="plan-grid">
+                <div class="plan-box">
+                  <h3>上午・<a target="_blank" rel="noopener noreferrer"
+                      href="https://www.google.com/maps/search/?api=1&query=THE%20RAIL%20KITCHEN%20CHIKUGO">THE RAIL
+                      KITCHEN</a></h3>
+                  <ul>
+                    <li>09:15 飯店集合</li>
+                    <li>前往博多車站吃吃喝喝逛逛</li>
+                    <li>早餐：<a target="_blank" rel="noopener noreferrer"
+                        href="https://www.google.com/maps/search/?api=1&query=Hakata%20Ichibangai">博多一番街</a></li>
+                    <li>11:21–14:03 <a target="_blank" rel="noopener noreferrer"
+                        href="https://www.google.com/maps/search/?api=1&query=THE%20RAIL%20KITCHEN%20CHIKUGO">THE RAIL
+                        KITCHEN</a></li>
+                  </ul>
+                </div>
+                <div class="plan-box">
+                  <h3>午後・天神／<a target="_blank" rel="noopener noreferrer"
+                      href="https://www.google.com/maps/search/?api=1&query=Daimyo%20Fukuoka">大名</a></h3>
+                  <ul>
+                    <li>14:15 自由時間</li>
+                    <li>福岡 PARCO → <a target="_blank" rel="noopener noreferrer"
+                        href="https://www.google.com/maps/search/?api=1&query=Tenjin%20Underground%20Mall">天神地下街</a> →
+                      <a target="_blank" rel="noopener noreferrer"
+                        href="https://www.google.com/maps/search/?api=1&query=ONE%20FUKUOKA%20BLDG">ONE FUKUOKA
+                        BLDG.</a> → <a target="_blank" rel="noopener noreferrer"
+                        href="https://www.google.com/maps/search/?api=1&query=Daimyo%20Fukuoka">大名</a> → <a
+                        target="_blank" rel="noopener noreferrer"
+                        href="https://www.google.com/maps/search/?api=1&query=Imaizumi%20Fukuoka">今泉</a>
+                    </li>
+                    <li>品牌：<a target="_blank" rel="noopener noreferrer"
+                        href="https://www.google.com/maps/search/?api=1&query=Vivienne%20Westwood%20Fukuoka">Vivienne
+                        Westwood</a></li>
+                    <li>二手店：<a target="_blank" rel="noopener noreferrer"
+                        href="https://www.google.com/maps/search/?api=1&query=BRING%20Fukuoka%20Tenjin">BRING Fukuoka
+                        Tenjin</a>、<a target="_blank" rel="noopener noreferrer"
+                        href="https://www.google.com/maps/search/?api=1&query=RAGTAG%20Fukuoka">RAGTAG</a></li>
+                    <li>二手精品：<a target="_blank" rel="noopener noreferrer"
+                        href="https://www.google.com/maps/search/?api=1&query=KOMEHYO%20FUKUOKA%20TENJIN">KOMEHYO
+                        FUKUOKA TENJIN</a></li>
+                    <li>17:00 <a target="_blank" rel="noopener noreferrer"
+                        href="https://www.google.com/maps/search/?api=1&query=%E3%81%99%E3%81%BF%E5%8A%87%E5%A0%B4%20%E3%82%80%E3%81%95%E3%81%97%E5%9D%90%20Fukuoka">すみ劇場
+                        むさし坐 爐端燒</a></li>
+                    <li><a target="_blank" rel="noopener noreferrer"
+                        href="https://maps.app.goo.gl/anZrCwin8PAHthR3A?g_st=ic">晚餐後逛超市買伴手禮、零食、宵夜</a></li>
+                    <li>或到<a target="_blank" rel="noopener noreferrer"
+                        href="https://www.google.com/maps/search/?api=1&query=Nakasu%20Fukuoka">中洲</a>喝一杯</li>
+                  </ul>
+                </div>
+              </div>
+              <div class="note-box">⚠️ 9/4 要早起，晚上不要太晚回飯店。</div>
+            </div>
+          </article>
+
+          <article class="day-card" id="day-0904">
+            <div class="day-top">
+              <div class="day-date">9/4（五）</div>
+              <div class="day-tag">唐戶市場＋門司港＋<a target="_blank" rel="noopener noreferrer"
+                  href="https://www.google.com/maps/search/?api=1&query=Dazaifu%20Tenmangu">太宰府</a></div>
+            </div>
+            <div class="day-body">
+              <div class="plan-grid">
+                <div class="plan-box">
+                  <h3>上午・下關／門司港</h3>
+                  <ul>
+                    <li>07:45 飯店集合</li>
+                    <li>09:00 抵達<a target="_blank" rel="noopener noreferrer"
+                        href="https://www.google.com/maps/search/?api=1&query=Karato%20Market%20Shimonoseki">唐戶市場</a>
+                    </li>
+                    <li>10:45 集合</li>
+                    <li>10:50 前往<a target="_blank" rel="noopener noreferrer"
+                        href="https://www.google.com/maps/search/?api=1&query=Kanmon%20Pedestrian%20Tunnel%20Shimonoseki">關門隧道</a>｜山口県下関市みもすそ川町22
+                    </li>
+                    <li>11:20 出隧道</li>
+                    <li>11:35 <a target="_blank" rel="noopener noreferrer"
+                        href="https://www.google.com/maps/search/?api=1&query=Mekari%20Shrine%20Kitakyushu">和布刈神社</a>買河豚御守
+                    </li>
+                    <li>司機接至門司港</li>
+                    <li>門司港站 → 港邊 → <a target="_blank" rel="noopener noreferrer"
+                        href="https://www.google.com/maps/search/?api=1&query=Former%20Moji%20Mitsui%20Club">舊門司三井俱樂部</a>
+                      → <a target="_blank" rel="noopener noreferrer"
+                        href="https://www.google.com/maps/search/?api=1&query=Former%20Moji%20Customs">舊門司稅關</a> → <a
+                        target="_blank" rel="noopener noreferrer"
+                        href="https://www.google.com/maps/search/?api=1&query=Kaikyo%20Plaza%20Mojiko">海峽廣場</a> → <a
+                        target="_blank" rel="noopener noreferrer"
+                        href="https://www.google.com/maps/search/?api=1&query=Blue%20Wing%20Moji">Blue Wing Moji</a> →
+                      回司機接送點</li>
+                  </ul>
+                </div>
+                <div class="plan-box">
+                  <h3>午後・<a target="_blank" rel="noopener noreferrer"
+                      href="https://www.google.com/maps/search/?api=1&query=Dazaifu%20Tenmangu">太宰府</a>／晚上</h3>
+                  <ul>
+                    <li>13:30 出發前往<a target="_blank" rel="noopener noreferrer"
+                        href="https://www.google.com/maps/search/?api=1&query=Dazaifu%20Tenmangu">太宰府</a></li>
+                    <li>14:30 <a target="_blank" rel="noopener noreferrer"
+                        href="https://www.google.com/maps/search/?api=1&query=Dazaifu%20Tenmangu">太宰府</a>＋<a
+                        target="_blank" rel="noopener noreferrer"
+                        href="https://www.google.com/maps/search/?api=1&query=Dazaifu%20Omotesando">表參道</a>＋御守＋吃東西</li>
+                    <li>17:00 回飯店周遭</li>
+                    <li>20:00 <a target="_blank" rel="noopener noreferrer"
+                        href="https://www.google.com/maps/search/?api=1&query=Ohori%20Park%20Fukuoka">大濠公園</a>夜間燈光秀</li>
+                  </ul>
+                </div>
+              </div>
+              <div class="note-box">這天移動較多，<a target="_blank" rel="noopener noreferrer"
+                  href="https://www.google.com/maps/search/?api=1&query=Karato%20Market%20Shimonoseki">唐戶市場</a>與門司港請注意集合時間。
+              </div>
+            </div>
+          </article>
+
+          <article class="day-card" id="day-0905">
+            <div class="day-top">
+              <div class="day-date">9/5（六）</div>
+              <div class="day-tag">柳川＋芥屋大門＋糸島</div>
+            </div>
+            <div class="day-body">
+              <div class="plan-grid">
+                <div class="plan-box">
+                  <h3>柳川</h3>
+                  <ul>
+                    <li>08:20 出發</li>
+                    <li>10:00–10:40 柳川包船｜<a target="_blank" rel="noopener noreferrer"
+                        href="https://www.google.com/maps/search/?api=1&query=Kamenoi%20Hotel%20Yanagawa">龜之井飯店柳川</a>集合
+                    </li>
+                    <li>11:00 <a target="_blank" rel="noopener noreferrer"
+                        href="https://www.google.com/maps/search/?api=1&query=Ganso%20Motoyoshiya%20Okinohata">元祖本吉屋
+                        沖端店</a>｜鰻魚飯</li>
+                    <li>🚨 12:45 預計離開</li>
+                  </ul>
+                </div>
+                <div class="plan-box">
+                  <h3>糸島</h3>
+                  <ul>
+                    <li>15:30／16:00 <a target="_blank" rel="noopener noreferrer"
+                        href="https://www.google.com/maps/search/?api=1&query=Keya%20no%20Oto%20sightseeing%20boat">芥屋大門遊覽船</a>｜約
+                      25 分鐘</li>
+                    <li>16:10 <a target="_blank" rel="noopener noreferrer"
+                        href="https://www.google.com/maps/search/?api=1&query=Mataichi%20no%20Shio%20Itoshima">またいちの塩</a>・<a
+                        target="_blank" rel="noopener noreferrer"
+                        href="https://www.google.com/maps/search/?api=1&query=Mataichi%20no%20Shio%20Pudding%20Itoshima">花塩布丁</a>｜若搭
+                      15:30 船班再去</li>
+                    <li>🚨 16:20 最晚離開｜前往海鮮堂約 30 分鐘</li>
+                    <li>16:50–18:20 <a target="_blank" rel="noopener noreferrer"
+                        href="https://www.google.com/maps/search/?api=1&query=Itoshima%20Kaisendo">糸島海鮮堂</a></li>
+                    <li>回 CROSS Life 約 1 小時</li>
+                    <li>20:00–20:15 <a target="_blank" rel="noopener noreferrer"
+                        href="https://www.google.com/maps/search/?api=1&query=Ichiran%20Main%20Shop%20Fukuoka">一蘭拉麵總店</a>表演
+                    </li>
+                    <li>20:30 體驗屋台</li>
+                  </ul>
+                </div>
+              </div>
+              <div class="note-box">最重要時間點：元祖本吉屋 12:45 預計離開；<a target="_blank" rel="noopener noreferrer"
+                  href="https://www.google.com/maps/search/?api=1&query=Mataichi%20no%20Shio%20Pudding%20Itoshima">花塩布丁</a>區域
+                16:20 最晚離開。</div>
+            </div>
+          </article>
+
+          <article class="day-card" id="day-0906">
+            <div class="day-top">
+              <div class="day-date">9/6（日）</div>
+              <div class="day-tag">返程日</div>
+            </div>
+            <div class="day-body">
+              <div class="plan-grid">
+                <div class="plan-box">
+                  <h3>早上・最後採買</h3>
+                  <ul>
+                    <li>一大早<a target="_blank" rel="noopener noreferrer"
+                        href="https://www.google.com/maps/search/?api=1&query=Yakuin%20Fukuoka">藥院</a> shopping</li>
+                    <li>山響屋買手工招財貓</li>
+                    <li>FULL FULL 麵包帶回台灣</li>
+                  </ul>
+                </div>
+                <div class="plan-box">
+                  <h3>前往機場</h3>
+                  <ul>
+                    <li>嘉義組（星宇航空 JX841）：11:00 前往機場</li>
+                    <li>台北組：13:00 前往機場</li>
+                  </ul>
+                </div>
+              </div>
+              <div class="note-box">返程日以最後採買為主，務必預留回飯店拿行李與前往機場時間。</div>
+            </div>
+          </article>
+        </div>
+        <div class="footer-note">2026 家庭旅遊手冊｜釜山・福岡・由布院 8/29–9/6</div>
+      </section>
+
+      <section class="app-page" id="notes-page">
+        <div class="section-head">旅途提醒</div>
+        <article class="day-card">
+          <div class="day-top">
+            <div class="day-date">出發前</div>
+            <div class="day-tag">CHECK</div>
+          </div>
+          <div class="day-body">
+            <div class="plan-grid">
+              <div class="plan-box">
+                <h3>隨身物品</h3>
+                <ul>
+                  <li>護照、錢包、手機</li>
+                  <li>充電器、行動電源</li>
+                  <li>常用藥品與個人物品</li>
+                </ul>
+              </div>
+              <div class="plan-box">
+                <h3>旅途中</h3>
+                <ul>
+                  <li>長輩以走得舒服為主，不趕行程</li>
+                  <li>包車日記得確認集合時間</li>
+                  <li>每天晚上確認隔天行程與天氣</li>
+                </ul>
+              </div>
+              <div class="plan-box">
+                <h3>交通與集合</h3>
+                <ul>
+                  <li>8/31 16:30 前抵達<a target="_blank" rel="noopener noreferrer"
+                      href="https://www.google.com/maps/search/?api=1&query=Busan%20Port%20International%20Passenger%20Terminal">釜山港國際旅客客運大樓</a>
+                  </li>
+                  <li>9/2、9/4、9/5 包車日務必準時集合</li>
+                  <li>9/5 特別注意 12:45、16:20 兩個最晚離開時間</li>
+                  <li>9/6 依航班分組前往機場</li>
+                </ul>
+              </div>
+              <div class="plan-box flight-info-box">
+                <h3>航班資訊</h3>
+                <div class="flight-group">
+                  <div class="flight-group-title">台北組<span>釜山來回航班</span></div>
+                  <div class="flight-ticket">
+                    <div class="flight-ticket-head"><span>去程｜台北 → 釜山</span><span>8/30（日）</span></div>
+                    <div class="flight-ticket-body">
+                      <div><span class="flight-date">航班</span><strong class="flight-number"><a target="_blank"
+                            rel="noopener noreferrer" href="https://share.google/I2hbudKAnyMiOiR7n">J7C6154</a></strong>
+                      </div>
+                      <div class="flight-route">TPE → PUS<span>台灣桃園 → 金海</span></div>
+                      <div class="flight-time">報到提醒<strong>起飛前 2 小時</strong></div>
+                    </div>
+
+                  </div>
+                  <div class="flight-ticket" style="margin-top:12px">
+                    <div class="flight-ticket-head"><span>回程｜福岡 → 台北</span><span>9/6（日）</span></div>
+                    <div class="flight-ticket-body">
+                      <div><span class="flight-date">航班</span><strong class="flight-number"><a target="_blank"
+                            rel="noopener noreferrer" href="https://share.google/uf8qfkXVudUi4dYkV">AK1511</a></strong>
+                      </div>
+                      <div class="flight-route">FUK → TPE<span>福岡 → 台灣桃園</span></div>
+                      <div class="flight-time">報到提醒<strong>起飛前 3 小時</strong></div>
+                    </div>
+
+                  </div>
+                </div>
+                <div class="flight-group">
+                  <div class="flight-group-title">
+                    <span>嘉義組</span>
+                  </div>
+
+                  <div class="flight-ticket">
+                    <div class="flight-ticket-head"><span>去程｜台北 → 福岡</span><span>2026/9/1（二）</span></div>
+                    <div class="flight-ticket-body">
+                      <div><span class="flight-date">航班</span><strong class="flight-number"><a target="_blank"
+                            rel="noopener noreferrer" href="https://share.google/zkN8lBvpbEoGnbp72">JX840</a></strong>
+                      </div>
+                      <div class="flight-route">TPE → FUK<span>桃園國際機場 T1 → 福岡機場 T1</span></div>
+                      <div class="flight-time">起飛／抵達<strong>09:35 → 13:05</strong></div>
+                    </div>
+
+                  </div>
+                  <div class="flight-ticket" style="margin-top:12px">
+                    <div class="flight-ticket-head"><span>回程｜福岡 → 台北</span><span>2026/9/6（日）</span></div>
+                    <div class="flight-ticket-body">
+                      <div><span class="flight-date">航班</span><strong class="flight-number"><a target="_blank"
+                            rel="noopener noreferrer" href="https://share.google/lioySplZ3DsDt98vR">JX841</a></strong>
+                      </div>
+                      <div class="flight-route">FUK → TPE<span>福岡機場 T1 → 桃園國際機場 T1</span></div>
+                      <div class="flight-time">起飛／抵達<strong>14:15 → 15:45</strong></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="note-box">重要：航班資訊已列在此處，請務必確認起飛時間、登機門與接送集合時間；也可再補上飯店地址、電話、包車司機聯絡方式、船班資訊與緊急聯絡資訊。</div>
+          </div>
+        </article>
+      </section>
+    </main>
+  </div>
+  <div class="bottom-nav"><button class="bottom-tab active" data-page-target="today-page">今天</button><button
+      class="bottom-tab" data-page-target="schedule-page">行程</button><button class="bottom-tab"
+      data-page-target="notes-page">提醒</button></div>
+
+  <script>
+    const defaultSize = 22; let currentSize = Number(localStorage.getItem('familytrip-font-size')) || defaultSize;
+    function applyFontSize(size) { currentSize = Math.min(Math.max(size, 16), 38); document.body.style.fontSize = currentSize + 'px'; localStorage.setItem('familytrip-font-size', String(currentSize)) }
+    document.querySelectorAll('[data-action]').forEach(b => b.addEventListener('click', () => { if (b.dataset.action === 'increase') applyFontSize(currentSize + 2); if (b.dataset.action === 'decrease') applyFontSize(currentSize - 2); if (b.dataset.action === 'reset') applyFontSize(defaultSize) })); applyFontSize(currentSize);
+    const menuToggle = document.querySelector('.menu-toggle'), sideMenu = document.querySelector('.side-menu'); menuToggle.addEventListener('click', () => sideMenu.classList.toggle('open'));
+    document.addEventListener('click', e => { if (!e.target.closest('.menu-toggle') && !e.target.closest('.side-menu')) sideMenu.classList.remove('open') });
+    const pageButtons = document.querySelectorAll('[data-page-target]'), appPages = document.querySelectorAll('.app-page');
+    function showPage(id) { appPages.forEach(p => p.classList.toggle('active', p.id === id)); pageButtons.forEach(b => b.classList.toggle('active', b.dataset.pageTarget === id)); sideMenu.classList.remove('open'); window.scrollTo({ top: 0, behavior: 'smooth' }) }
+    pageButtons.forEach(b => b.addEventListener('click', () => showPage(b.dataset.pageTarget)));
+
+    const tripYear = 2026;
+    const daySegments = {
+      '8-29': [{ start: 0, end: 24, title: '抵達釜山', detail: '入住、休息與附近自由活動' }],
+      '8-30': [{ start: 0, end: 12, title: '分組行程', detail: 'Spa Haesurang、小王子／白淺灘文化村、醫美' }, { start: 12, end: 17, title: '南浦洞逛街', detail: '飯店寄放行李後自由活動' }, { start: 17, end: 20.5, title: '韓牛＋光復路', detail: '17:00 韓牛、光復路時尚街、樂天市場' }, { start: 20.5, end: 24, title: 'BIFF 廣場', detail: '20:30 49 號阿珠媽煮飯' }],
+      '8-31': [{ start: 0, end: 8, title: '準備出門', detail: '今天下午要前往釜山港' }, { start: 8, end: 10, title: '釜田市場', detail: '08:00 吃吃喝喝、前往田浦' }, { start: 10, end: 11, title: 'OLIVE YOUNG', detail: '10:00 色彩鑑定、膚質檢測' }, { start: 11, end: 13, title: '人生四格＋逛街', detail: '11:00 Sticker 拍貼' }, { start: 13, end: 16.5, title: '章蝦腸湯＋西面', detail: '13:00 午餐、血拼、剪頭髮' }, { start: 16.5, end: 24, title: '釜山港 → 福岡', detail: '16:30 抵達客運大樓並搭船' }],
+      '9-1': [{ start: 0, end: 8, title: '船上移動', detail: '前往福岡' }, { start: 8, end: 9.5, title: '抵達博多港', detail: '08:00 抵達、寄放行李' }, { start: 9.5, end: 11.8, title: 'DACOMECCA', detail: '09:30 明太子麵包、前往巴士站' }, { start: 11.8, end: 15, title: '高速巴士往由布院', detail: '11:48 出發、抵達後午餐' }, { start: 15, end: 18, title: '由布院集合', detail: '嘉義組抵達、飯店接駁' }, { start: 18, end: 24, title: '花由飯店', detail: '一泊二食、泡湯休息' }],
+      '9-2': [{ start: 0, end: 8, title: '由布院早晨', detail: '準備早餐與退房' }, { start: 8, end: 9.17, title: '飯店早餐', detail: '08:00／08:30 早餐' }, { start: 9.17, end: 10.17, title: '集合＋金鱗湖', detail: '09:10 集合，09:30–10:10 散步' }, { start: 10.17, end: 12.5, title: '童話村＋湯之坪', detail: '10:10–12:30 拍照吃喝' }, { start: 12.5, end: 14.5, title: '前往酒莊', detail: '12:40 出發，13:45 KYOHO JAPAN' }, { start: 14.5, end: 16.5, title: '緑峰園採葡萄', detail: '14:30–15:15 採葡萄' }, { start: 16.5, end: 20.5, title: '入住＋博多運河城', detail: '16:30 CROSS Life，17:30 運河城' }, { start: 20.5, end: 24, title: '屋台宵夜', detail: '體力好可去屋台' }],
+      '9-3': [{ start: 0, end: 9.25, title: '準備出發', detail: '今天是觀光列車＋天神購物' }, { start: 9.25, end: 11.35, title: '博多車站', detail: '09:15 集合、早餐博多一番街' }, { start: 11.35, end: 14.05, title: 'THE RAIL KITCHEN', detail: '11:21–14:03 觀光列車' }, { start: 14.05, end: 17, title: '天神／大名購物', detail: 'PARCO、ONE FUKUOKA、二手精品' }, { start: 17, end: 19, title: '爐端燒', detail: '17:00 すみ劇場 むさし坐' }, { start: 19, end: 24, title: '超市／中洲', detail: '伴手禮、零食、宵夜或喝一杯' }],
+      '9-4': [{ start: 0, end: 7.75, title: '準備早起', detail: '07:45 飯店集合' }, { start: 7.75, end: 9, title: '前往唐戶市場', detail: '包車移動' }, { start: 9, end: 10.83, title: '唐戶市場', detail: '09:00–10:45 海鮮市場' }, { start: 10.83, end: 11.58, title: '關門隧道', detail: '10:50 出發、11:20 出隧道' }, { start: 11.58, end: 13.5, title: '和布刈神社＋門司港', detail: '11:35 河豚御守、門司港散步' }, { start: 13.5, end: 17, title: '太宰府', detail: '13:30 出發，14:30 表參道＋御守＋吃東西' }, { start: 17, end: 20, title: '回飯店周遭', detail: '17:00 回程休息' }, { start: 20, end: 24, title: '大濠公園燈光秀', detail: '20:00 夜間燈光秀' }],
+      '9-5': [{ start: 0, end: 8.33, title: '準備出發', detail: '08:20 出發' }, { start: 8.33, end: 10, title: '前往柳川', detail: '包車移動' }, { start: 10, end: 11, title: '柳川包船', detail: '10:00–10:40 龜之井飯店柳川集合' }, { start: 11, end: 12.75, title: '元祖本吉屋', detail: '11:00 鰻魚飯，12:45 預計離開' }, { start: 12.75, end: 15.5, title: '前往糸島', detail: '移動至芥屋大門' }, { start: 15.5, end: 16.17, title: '芥屋大門遊覽船', detail: '15:30／16:00 船班' }, { start: 16.17, end: 16.33, title: '花塩布丁', detail: '16:10 またいちの塩' }, { start: 16.33, end: 16.83, title: '最晚離開', detail: '16:20 前務必離開前往海鮮堂' }, { start: 16.83, end: 18.33, title: '糸島海鮮堂', detail: '16:50–18:20' }, { start: 18.33, end: 20, title: '回福岡市區', detail: '回 CROSS Life 約一小時' }, { start: 20, end: 20.5, title: '一蘭總店表演', detail: '20:00–20:15' }, { start: 20.5, end: 24, title: '體驗屋台', detail: '20:30 屋台' }],
+      '9-6': [{ start: 0, end: 11, title: '最後採買', detail: '藥院、山響屋、FULL FULL 麵包' }, { start: 11, end: 13, title: '星宇航空組前往機場', detail: '11:00 出發' }, { start: 13, end: 24, title: '台北組前往機場', detail: '13:00 出發' }]
+    };
+    function updateNowCard() {
+      const now = new Date(), m = now.getMonth() + 1, d = now.getDate(), h = now.getHours() + now.getMinutes() / 60, mi = String(now.getMinutes()).padStart(2, '0');
+      document.getElementById('now-time').textContent = String(now.getHours()).padStart(2, '0') + ':' + mi;
+      document.querySelectorAll('.day-card').forEach(c => c.classList.remove('today-highlight'));
+      const start = new Date(tripYear, 7, 29), end = new Date(tripYear, 8, 7), label = document.getElementById('today-date-label'), summary = document.getElementById('today-summary');
+      if (now < start) { const days = Math.ceil((start - now) / 86400000); document.getElementById('now-title').textContent = '距離出發還有 ' + days + ' 天'; document.getElementById('now-detail').textContent = '8/29 開始釜山 × 福岡 × 由布院家庭旅行'; label.textContent = '出發前'; summary.textContent = '目前還沒出發。可以先到「行程」頁熟悉每天安排，到「提醒」頁檢查隨身物品。'; return }
+      if (now >= end) { document.getElementById('now-title').textContent = '旅程已結束'; document.getElementById('now-detail').textContent = '把照片和回憶慢慢整理起來吧'; label.textContent = '旅程完成'; summary.textContent = '2026 家庭旅行已經結束。'; return }
+      const key = m + '-' + d, segs = daySegments[key], card = document.getElementById('day-' + String(m).padStart(2, '0') + String(d).padStart(2, '0'));
+      if (card) card.classList.add('today-highlight'); label.textContent = m + '/' + d;
+      if (!segs) { document.getElementById('now-title').textContent = '今天沒有排定行程'; document.getElementById('now-detail').textContent = '依現場狀況自由安排'; summary.textContent = '今天沒有固定安排，可以依大家體力自由調整。'; return }
+      const cur = segs.find(s => h >= s.start && h < s.end) || segs[segs.length - 1];
+      document.getElementById('now-title').textContent = cur.title; document.getElementById('now-detail').textContent = cur.detail; summary.textContent = '現在：' + cur.title + '｜' + cur.detail;
+    }
+    updateNowCard(); setInterval(updateNowCard, 60000);
+
+    const weatherLocations = {
+      busan: { lat: 35.1796, lon: 129.0756, date: '2026-08-30' },
+      fukuoka: { lat: 33.5902, lon: 130.4017, date: '2026-09-03' },
+      yufuin: { lat: 33.2646, lon: 131.3544, date: '2026-09-02' },
+      shimonoseki: { lat: 33.9578, lon: 130.9415, date: '2026-09-04' },
+      dazaifu: { lat: 33.5183, lon: 130.5337, date: '2026-09-04' },
+      yanagawa: { lat: 33.1631, lon: 130.4058, date: '2026-09-05' },
+      itoshima: { lat: 33.5571, lon: 130.1956, date: '2026-09-05' }
+    };
+    function weatherText(code) {
+      if (code === 0) return '☀️ 晴朗';
+      if ([1, 2].includes(code)) return '🌤️ 晴時多雲';
+      if (code === 3) return '☁️ 多雲';
+      if ([45, 48].includes(code)) return '🌫️ 有霧';
+      if ([51, 53, 55, 56, 57].includes(code)) return '🌦️ 毛毛雨';
+      if ([61, 63, 65, 66, 67, 80, 81, 82].includes(code)) return '🌧️ 下雨';
+      if ([71, 73, 75, 77, 85, 86].includes(code)) return '🌨️ 降雪';
+      if ([95, 96, 99].includes(code)) return '⛈️ 雷雨';
+      return '🌤️ 天氣變化';
+    }
+    async function loadOneWeather(key, cfg) {
+      const card = document.querySelector('[data-weather="' + key + '"]');
+      const status = card.querySelector('.weather-status'), temp = card.querySelector('.weather-temp'), rain = card.querySelector('.weather-rain');
+      try {
+        status.textContent = '讀取中…'; temp.textContent = '--'; rain.textContent = '降雨機率：--';
+        const url = 'https://api.open-meteo.com/v1/forecast?latitude=' + cfg.lat + '&longitude=' + cfg.lon + '&daily=weather_code,temperature_2m_max,temperature_2m_min,precipitation_probability_max&timezone=Asia%2FTokyo&forecast_days=16';
+        const r = await fetch(url);
+        if (!r.ok) throw new Error('weather fetch failed');
+        const j = await r.json();
+        const i = j.daily.time.indexOf(cfg.date);
+        if (i < 0) {
+          status.textContent = '尚未進入可預報範圍';
+          temp.textContent = '—';
+          rain.textContent = '接近旅遊日期後再更新';
+          return;
+        }
+        status.textContent = weatherText(j.daily.weather_code[i]);
+        temp.textContent = Math.round(j.daily.temperature_2m_max[i]) + '° / ' + Math.round(j.daily.temperature_2m_min[i]) + '°';
+        const p = j.daily.precipitation_probability_max[i];
+        rain.textContent = '降雨機率：' + (p == null ? '--' : p + '%');
+      } catch (e) {
+        status.textContent = '暫時無法取得';
+        temp.textContent = '—';
+        rain.textContent = '請稍後按「更新天氣」';
+      }
+    }
+    async function loadWeather() {
+      const btn = document.getElementById('weather-refresh');
+      if (btn) { btn.disabled = true; btn.textContent = '更新中…' }
+      await Promise.all(Object.entries(weatherLocations).map(([k, v]) => loadOneWeather(k, v)));
+      if (btn) { btn.disabled = false; btn.textContent = '更新天氣' }
+    }
+    document.getElementById('weather-refresh')?.addEventListener('click', loadWeather);
+    loadWeather();
+
+  </script>
+</body>
+
+</html>
