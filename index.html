@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zh-Hant">
+<html lang="zh-TW">
 
 <head>
   <meta charset="UTF-8">
@@ -47,29 +47,6 @@
       text-decoration-thickness: 1px;
       text-underline-offset: 3px;
       transition: color .2s ease;
-    }
-
-    a:hover {
-      color: var(--red);
-    }
-
-    button:focus-visible,
-    a:focus-visible {
-      outline: 3px solid rgba(21, 154, 168, .42);
-      outline-offset: 3px;
-    }
-
-    img {
-      display: block;
-      max-width: 100%;
-      height: auto;
-      border-radius: 8px;
-    }
-
-    a {
-      color: var(--green);
-      text-decoration-thickness: 1px;
-      text-underline-offset: 3px;
     }
 
     a:hover {
@@ -468,10 +445,6 @@
     .plan-box ul {
       margin: 0;
       padding-left: 1.15em
-    }
-
-    .plan-box li+li {
-      margin-top: 3px;
     }
 
     .plan-box li::marker {
@@ -1076,18 +1049,20 @@
       <div class="brand">2026 家庭旅遊</div>
       <div class="header-tools">
         <div class="font-tools">
-          <button data-action="decrease">－</button><button class="reset" data-action="reset">重設</button><button
-            data-action="increase">＋</button>
+          <button type="button" data-action="decrease" aria-label="縮小字體">－</button><button type="button"
+            class="reset" data-action="reset">重設</button><button type="button" data-action="increase"
+            aria-label="放大字體">＋</button>
         </div>
-        <button class="menu-toggle" aria-label="開啟選單">☰</button>
+        <button class="menu-toggle" type="button" aria-label="開啟選單" aria-expanded="false"
+          aria-controls="side-menu">☰</button>
       </div>
     </div>
-    <nav class="side-menu">
+    <nav class="side-menu" id="side-menu" aria-label="行程導覽">
       <h3>行程導覽</h3>
-      <button data-page-target="today-page">今天</button>
-      <button data-page-target="schedule-page">完整行程</button>
-      <button data-page-target="notes-page">旅途提醒</button>
-      <button data-page-target="currency-page">匯率換算</button>
+      <button type="button" data-page-target="today-page">今天</button>
+      <button type="button" data-page-target="schedule-page">完整行程</button>
+      <button type="button" data-page-target="notes-page">旅途提醒</button>
+      <button type="button" data-page-target="currency-page">匯率換算</button>
     </nav>
     <main>
       <section class="app-page active" id="today-page">
@@ -1664,27 +1639,31 @@
       <button type="button" id="close-ramen-dialog">關閉</button>
     </div>
   </dialog>
-  <div class="bottom-nav"><button class="bottom-tab active" data-page-target="today-page">今天</button><button
-      class="bottom-tab" data-page-target="schedule-page">行程</button><button class="bottom-tab"
-      data-page-target="notes-page">提醒</button></div>
+  <div class="bottom-nav"><button class="bottom-tab active" type="button" data-page-target="today-page">今天</button><button
+      class="bottom-tab" type="button" data-page-target="schedule-page">行程</button><button class="bottom-tab"
+      type="button" data-page-target="notes-page">提醒</button></div>
 
   <script>
     const defaultSize = 22; let currentSize = Number(localStorage.getItem('familytrip-font-size')) || defaultSize;
     function applyFontSize(size) { currentSize = Math.min(Math.max(size, 16), 38); document.body.style.fontSize = currentSize + 'px'; localStorage.setItem('familytrip-font-size', String(currentSize)) }
     document.querySelectorAll('[data-action]').forEach(b => b.addEventListener('click', () => { if (b.dataset.action === 'increase') applyFontSize(currentSize + 2); if (b.dataset.action === 'decrease') applyFontSize(currentSize - 2); if (b.dataset.action === 'reset') applyFontSize(defaultSize) })); applyFontSize(currentSize);
-    const menuToggle = document.querySelector('.menu-toggle'), sideMenu = document.querySelector('.side-menu'); menuToggle.addEventListener('click', () => sideMenu.classList.toggle('open'));
-    document.addEventListener('click', e => { if (!e.target.closest('.menu-toggle') && !e.target.closest('.side-menu')) sideMenu.classList.remove('open') });
+    const menuToggle = document.querySelector('.menu-toggle'), sideMenu = document.querySelector('.side-menu');
+    function setMenuOpen(isOpen) { sideMenu.classList.toggle('open', isOpen); menuToggle.setAttribute('aria-expanded', String(isOpen)); menuToggle.setAttribute('aria-label', isOpen ? '關閉選單' : '開啟選單') }
+    menuToggle.addEventListener('click', () => setMenuOpen(!sideMenu.classList.contains('open')));
+    document.addEventListener('click', e => { if (!e.target.closest('.menu-toggle') && !e.target.closest('.side-menu')) setMenuOpen(false) });
     const pageButtons = document.querySelectorAll('[data-page-target]'), appPages = document.querySelectorAll('.app-page');
-    function showPage(id) { appPages.forEach(p => p.classList.toggle('active', p.id === id)); pageButtons.forEach(b => b.classList.toggle('active', b.dataset.pageTarget === id)); sideMenu.classList.remove('open'); window.scrollTo({ top: 0, behavior: 'smooth' }) }
+    function showPage(id) { appPages.forEach(p => p.classList.toggle('active', p.id === id)); pageButtons.forEach(b => b.classList.toggle('active', b.dataset.pageTarget === id)); setMenuOpen(false); window.scrollTo({ top: 0, behavior: 'smooth' }) }
     pageButtons.forEach(b => b.addEventListener('click', () => showPage(b.dataset.pageTarget)));
 
     const ramenInfo = document.getElementById('ramen-stadium-info'), ramenDialog = document.getElementById('ramen-stadium-dialog');
-    ramenInfo.addEventListener('click', () => ramenDialog.showModal());
-    document.getElementById('close-ramen-dialog').addEventListener('click', () => ramenDialog.close());
-    ramenDialog.addEventListener('click', e => { if (e.target === ramenDialog) ramenDialog.close() });
+    if (ramenInfo && ramenDialog) {
+      ramenInfo.addEventListener('click', () => ramenDialog.showModal());
+      document.getElementById('close-ramen-dialog')?.addEventListener('click', () => ramenDialog.close());
+      ramenDialog.addEventListener('click', e => { if (e.target === ramenDialog) ramenDialog.close() });
+    }
 
     const currencyFromAmount = document.getElementById('currency-from-amount'), currencyToAmount = document.getElementById('currency-to-amount'), currencyFrom = document.getElementById('currency-from'), currencyTo = document.getElementById('currency-to'), currencySwap = document.getElementById('currency-swap'), currencyRateLabel = document.getElementById('currency-rate-label'), currencyRefresh = document.getElementById('currency-refresh');
-    const currencyNames = { TWD: '台幣', KRW: '韓元', JPY: '日圓' }; let currencyRates = {};
+    let currencyRates = { KRW: 43.5, JPY: 5 };
     function getCurrencyRate(code) { return code === 'TWD' ? 1 : currencyRates[code] }
     function updateCurrency(source) {
       const fromRate = getCurrencyRate(currencyFrom.value), toRate = getCurrencyRate(currencyTo.value);
@@ -1712,7 +1691,7 @@
         const updatedAt = new Date(data.time_last_update_unix * 1000).toLocaleString('zh-TW');
         currencyRateLabel.textContent = '已更新｜資料來源更新：' + updatedAt + '｜匯率每日更新'; updateCurrency('from');
       } catch (error) {
-        currencyRates = {}; currencyRateLabel.textContent = '目前無法取得即時匯率，請確認網路連線後再試';
+        currencyRateLabel.textContent = '目前無法取得即時匯率，先使用暫存匯率估算'; updateCurrency('from');
       } finally { currencyRefresh.disabled = false; currencyRefresh.textContent = '更新匯率' }
     }
     currencyRefresh.addEventListener('click', loadCurrencyRates);
@@ -1752,6 +1731,7 @@
     }
     async function loadOneWeather(key, cfg) {
       const card = document.querySelector('[data-weather="' + key + '"]');
+      if (!card) return;
       const status = card.querySelector('.weather-status'), temp = card.querySelector('.weather-temp'), rain = card.querySelector('.weather-rain');
       try {
         status.textContent = '讀取中…'; temp.textContent = '--'; rain.textContent = '降雨機率：--';
